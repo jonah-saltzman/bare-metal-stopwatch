@@ -1,0 +1,8 @@
+.project
+.cproject
+*.launch
+*RAM.ld
+Debug
+Release
+.vscode
+.settings
