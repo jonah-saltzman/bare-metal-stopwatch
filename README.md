@@ -16,7 +16,7 @@ My hand-rolled board initialization procedure can be found in [/Src/init.c](Src/
 ## Stopwatch
 
 ![stopwatch](https://i.imgur.com/pQkM8p2.jpg)
-![stopwatch in action](https://lh3.googleusercontent.com/u/0/drive-viewer/AAOQEOTPtpH2oY6T6f6DezI16WeY-FEhqidHJYbfq-3l54gyiW3LsByGXdTrKUA7ojwIe7Tn4vvV7hQCI3R5vkODseWYMh-2=w1920-h967)
+![stopwatch in action](https://i.imgur.com/dSyPqIz.gif)
 
 Stopwatch starts counting time when the user presses the button, with a resolution
 of 1/100th of a second, and displays the current time on a 4-digit display. The
