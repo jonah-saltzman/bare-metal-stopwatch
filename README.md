@@ -23,6 +23,8 @@ of 1/100th of a second, and displays the current time on a 4-digit display. The
 stopwatch can be stopped and started again with the button, or reset with the reset
 button.
 
+[YouTube link](https://www.youtube.com/shorts/_y3RYFs5QW8)
+
 ### Counting time
 
 All of Stopwatch is interrupt-driven. The button interrupt handler is responsible
