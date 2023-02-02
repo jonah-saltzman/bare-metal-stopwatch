@@ -34,7 +34,7 @@ static void display_digit(uint16_t val, uint16_t decimal_mask)
 
 void render_display()
 {
-    if (current_digit == 0) // finish rendering the number before updating it
+    if (current_digit == 0) // finish rendering the current number before updating it
         temp_number = centi_seconds;
     uint16_t digit = temp_number % 10;
     temp_number /= 10;
