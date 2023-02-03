@@ -68,6 +68,14 @@ digit, and so on. Thus the entire 4 digits are displayed once every 1/300th of
 a second, creating the appearance of all digits being displayed all the time.
 
 ```C
+// interrupts.c
+void TIM2_IRQHandler(void)
+{
+	TIM2->SR &= (~1UL);
+	render_display();
+}
+
+// display.c
 static uint8_t current_digit = 0;
 
 static uint16_t temp_number = 0;
