@@ -1,4 +1,4 @@
-#include "../Inc/sys/stm32f4xx.h"
+#include "sys/stm32f4xx.h"
 
 void uart3_writechar(int c)
 {

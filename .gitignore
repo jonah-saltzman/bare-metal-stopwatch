@@ -1,8 +1,9 @@
-.project
 .cproject
+.project
 *.launch
-*RAM.ld
+.settings
+.vscode
 Debug
 Release
-.vscode
-.settings
+*.json
+STM32F439ZITX_RAM.ld

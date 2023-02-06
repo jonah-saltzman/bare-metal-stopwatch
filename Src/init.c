@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include "../Inc/sys/stm32f439xx.h"
-#include "../Inc/init.h"
-#include "../Inc/display.h"
+#include "sys/stm32f439xx.h"
+#include "init.h"
+#include "timers.h"
 
-extern ClockSpeeds clocks;
+ClockSpeeds clocks __attribute__((section("DATA")));
 
 void enable_uart3(void)
 {
@@ -317,64 +317,6 @@ uint32_t pll_P_scale(uint32_t x)
         default:
             abort();
     }
-}
-
-void initialize_TIM2_5_stopwatch(
-	TIM_TypeDef* timer, 
-	uint32_t resolution, 
-	uint32_t irq_prio
-)
-{
-	timer->CR1 |= (1UL << 2);
-	timer->ARR = (clocks.tim1clk / resolution);
-	timer->EGR |= 1UL;
-	timer->DIER |= 1UL;
-	timer->CR1 &= (~1UL);
-
-	uint32_t irq_n = (uint32_t)timer == TIM2_BASE ? TIM2_IRQn : TIM5_IRQn;
-	NVIC_SetPriority(irq_n, irq_prio);
-	NVIC_EnableIRQ(irq_n);
-}
-
-void initialize_TIM10_11_TIM13_14_stopwatch(
-	TIM_TypeDef* timer,
-	ClockSpeeds* speeds,
-	uint32_t resolution,
-	uint32_t irq_prio
-)
-{
-	uint32_t arr = speeds->tim2clk / resolution;
-	uint32_t irq_n;
-	if (arr > UINT16_MAX)
-	{
-		printf("ARR of %lu > UINT16MAX\n", arr);
-		abort();
-	}
-	timer->CR1 |= (1UL << 2);
-	timer->ARR = (arr & 0xFFFF);
-	timer->EGR |= 1UL;
-	timer->DIER |= 1UL;
-	timer->CR1 &= (~1UL);
-
-	switch((uint32_t)timer) {
-		case TIM10_BASE:
-			irq_n = TIM1_UP_TIM10_IRQn;
-			break;
-		case TIM11_BASE:
-			irq_n = TIM1_TRG_COM_TIM11_IRQn;
-			break;
-		case TIM13_BASE:
-			irq_n = TIM8_UP_TIM13_IRQn;
-			break;
-		case TIM14_BASE:
-			irq_n = TIM8_TRG_COM_TIM14_IRQn;
-			break;
-		default:
-			abort();
-	}
-
-	NVIC_SetPriority(irq_n, irq_prio);
-	NVIC_EnableIRQ(irq_n);
 }
 
 void initialize_IO(void)

@@ -1,5 +1,8 @@
-#include "../Inc/sys/stm32f439xx.h"
+#ifndef DISPLAY_H_
+#define DISPLAY_H_
+#include "sys/stm32f439xx.h"
 
+void set_next_value(uint16_t val);
 void render_display();
 
 #define FIRST_DIGIT  (GPIO_ODR_OD5_Msk)
@@ -42,3 +45,4 @@ void render_display();
 #define DIGIT_NINE (DIGIT_SEVEN | GPIO_ODR_OD11_Msk | GPIO_ODR_OD13_Msk)
 
 #define DIGIT_ZERO (DIGIT_EIGHT ^ GPIO_ODR_OD13_Msk)
+#endif

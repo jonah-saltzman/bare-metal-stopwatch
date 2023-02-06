@@ -1,9 +1,11 @@
-#ifndef SYSTICK_H_
-#define SYSTICK_H_
+#ifndef INIT_H_
+#define INIT_H_
 
 #include <stdint.h>
 
-void abort(void);
+void abort();
+
+extern struct ClockSpeeds clocks;
 
 #define MILLION(x) (1000000 * (x))
 
@@ -123,19 +125,6 @@ uint32_t enable_clocks(ClockInit* init, ClockSpeeds* speeds);
 void enable_uart3(void);
 
 void initialize_IO(void);
-
-void initialize_TIM2_5_stopwatch(
-	TIM_TypeDef* timer, 
-	uint32_t resolution, 
-	uint32_t irq_prio
-);
-
-void initialize_TIM10_11_TIM13_14_stopwatch(
-	TIM_TypeDef* timer,
-	ClockSpeeds* speeds,
-	uint32_t resolution,
-	uint32_t irq_prio
-);
 
 void initialize_systicks(void);
 

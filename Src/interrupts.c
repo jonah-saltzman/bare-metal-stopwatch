@@ -1,34 +1,11 @@
 #include <stdio.h>
-#include "../Inc/sys/stm32f4xx.h"
-#include "../Inc/timers.h"
-#include "../Inc/display.h"
-
-void TIM2_IRQHandler(void)
-{
-	TIM2->SR &= (~1UL);
-	render_display();
-}
-
-void TIM5_IRQHandler(void)
-{
-	TIM5->SR &= (~1UL);
-	centi_seconds++;
-}
+#include "sys/stm32f4xx.h"
+#include "timers.h"
+#include "display.h"
 
 void TIM1_UP_TIM10_IRQHandler(void)
 {
-	TIM10->SR &= (~1UL);
-	if (timer10_ticks)
-	{
-		--timer10_ticks;
-	}
-	else
-	{
-		GPIOB->ODR &= (~GPIO_ODR_OD14_Msk);
-		TIM10->CR1 &= (~1UL);
-		timer10_counting = 0;
-		printf("error led done\n");
-	}
+	
 }
 
 
@@ -36,13 +13,13 @@ void TIM1_UP_TIM10_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
 	EXTI->PR |= EXTI_PR_PR13;
-	if (timer5_counting)
+	if (tim5.status & TIM_STATUS_COUNTING_UP)
 	{
-		stop_timer(TIM5);
+		stop_timer(&tim5);
 	}
 	else
 	{
-		start_timer(TIM5);
+		start_timer(&tim5);
 	}
 }
 

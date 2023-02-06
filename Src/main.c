@@ -1,19 +1,19 @@
 #include <stdio.h>
-#include "../Inc/sys/stm32f4xx.h"
-#include "../Inc/init.h"
-#include "../Inc/io.h"
-#include "../Inc/timers.h"
-#include "../Inc/display.h"
+#include "sys/stm32f4xx.h"
+#include "init.h"
+#include "io.h"
+#include "timers.h"
+#include "display.h"
 
 int main(void)
 {
 
 	// timer2: render timer
 	// 1200Hz / 4 digits = 300Hz overall
-	initialize_TIM2_5_stopwatch(TIM2, 1200, TIM2_IRQ_PRIO);
+	initialize_stopwatch(&tim2, 1200, 100);
 
 	// timer5: 100Hz
-	initialize_TIM2_5_stopwatch(TIM5, 100, TIM5_IRQ_PRIO);
+	initialize_stopwatch(&tim5, 100, 101);
 
 	// gpio pins for display & buttons
 	initialize_IO();
@@ -22,7 +22,7 @@ int main(void)
 	enable_ext_intr(50);
 
 	// start rendering display
-	start_timer(TIM2);
+	start_timer(&tim2);
 
 	while (1)
 	{

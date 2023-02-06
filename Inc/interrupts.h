@@ -1,4 +1,7 @@
-#include "../Inc/sys/stm32f4xx.h"
+#ifndef INTERRUPTS_H_
+#define INTERRUPTS_H_
+
+#include "sys/stm32f4xx.h"
 
 void TIM2_IRQHandler(void);
 
@@ -13,3 +16,5 @@ void BusFault_Handler(void);
 void UsageFault_Handler(void);
 
 void WWDG_IRQHandler(void);
+
+#endif

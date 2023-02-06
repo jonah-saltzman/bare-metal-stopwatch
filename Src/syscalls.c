@@ -30,7 +30,6 @@
 #include <sys/time.h>
 #include <sys/times.h>
 #include <string.h>
-#include "../Inc/debug.h"
 
 
 /* Variables */
@@ -94,8 +93,6 @@ void force_print(char* ptr, unsigned len, uint32_t r)
 
 __attribute__((weak)) int _write(int file, char *ptr, int len)
 {
-  char msg[100];
-  uint32_t exc_num = __get_IPSR();
   // if (exc_num)
   // {
   //   if (IS_MAIN_DEBUGGING || IS_INTR_DEBUGGING)
@@ -112,8 +109,6 @@ __attribute__((weak)) int _write(int file, char *ptr, int len)
   // {
   //   set_main_debugging();
   // }
-  sprintf(msg, "[%lu]: ", exc_num);
-  force_print(msg, strlen(msg), 0);
   (void)file;
   int DataIdx;
   for (DataIdx = 0; DataIdx < len; DataIdx++)
